@@ -1,0 +1,24 @@
+page-home {
+    .toolbar-ios-primary .searchbar-ios .searchbar-input {
+        background: rgba(255, 255, 255, 0.18);
+    }
+    .searchbar-ios .searchbar-search-icon {
+        width: 19px;
+        height: 19px;
+    }
+    .banner-slides {
+        height: 166px;
+    }
+    .swiper-pagination-bullet-active {
+        background: #eb0b0b;
+    }
+    .m-grid {
+        ion-row {
+            ion-col {
+                ion-icon {
+                    font-size: 36px;
+                }
+            }
+        }
+    }
+}

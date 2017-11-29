@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-searchbar placeholder="找二手车 找房子 找家政" class="m-search"></ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides class="banner-slides" *ngIf="bannerSlides" autoplay="3000" pager="true" loop padding #bannerSlidesEl>
+    <ion-slide *ngFor="let bannerSlide of bannerSlides">
+      <img [src]="bannerSlide.imageUrl">
+    </ion-slide>
+  </ion-slides>
+  <ion-grid class="m-grid">
+    <ion-row text-center>
+      <ion-col (click)="carpooling()">
+        <ion-icon name="heart"></ion-icon>
+        <p>二手车</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>二手房</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>顺风车</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>家政</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>互联网</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>便民信息</p>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>二手设备</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>周边旅游</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="heart"></ion-icon>
+        <p>电商平台</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

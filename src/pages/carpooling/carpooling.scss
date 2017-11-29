@@ -1,0 +1,39 @@
+page-carpooling {
+    .title-icon {
+        color: #8e9093;
+    }
+    .header-grid {
+        ion-item {
+            padding: 0;
+        }
+        .item-ios.item-block .item-inner {
+            padding: 0;
+            border-bottom: none;
+        }
+        .item-ios p {
+            color: black;
+            margin-left: 4px;
+        }
+        .item-ios p:first-child {
+            color: #8e9093;
+        }
+        .label-ios {
+            margin: 11px 0 11px 0;
+        }
+        .item-ios [item-end] {
+            margin: 8px 8px 8px 0px;
+            color: #8e9093;
+        }
+    }
+    .driver-list {
+        ion-item {
+            font-size: 12px;
+        }
+        .item-ios {
+            padding: 0;
+        }
+        .label-ios {
+            margin: 11px 8px;
+        }
+    }
+}
