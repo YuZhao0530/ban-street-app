@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title (click)="changeType()">{{type == 'driver'? '找车主':'找乘客'}}<span class="title-icon">▼</span></ion-title>
+    <ion-title (click)="changeType()">{{type == 'driver'? '找车主':'找乘客'}}<ion-icon name="md-arrow-dropdown"></ion-icon></ion-title>
   </ion-navbar>
   <ion-toolbar no-padding>
     <ion-grid class="header-grid" no-padding>
@@ -16,21 +16,21 @@
           <ion-item>
             <p>出发地</p>
             <p>输入出发地点查询</p>
-            <p item-end>▼</p>
+            <ion-icon name="md-arrow-dropdown" item-end></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col col-5>
           <ion-item>
             <p>目的地</p>
             <p>输入目的地点查询</p>
-            <p item-end>▼</p>
+            <ion-icon name="md-arrow-dropdown" item-end></ion-icon>
           </ion-item>
         </ion-col>
         <ion-col col-2>
           <ion-item>
             <p>时间</p>
             <p>选择</p>
-            <p item-end>▼</p>
+            <ion-icon name="md-arrow-dropdown" item-end></ion-icon>
           </ion-item>
         </ion-col>
       </ion-row>

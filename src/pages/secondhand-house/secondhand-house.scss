@@ -1,3 +1,25 @@
 page-secondhand-house {
-
+    .item-ios ion-thumbnail img {
+        width: 84px;
+    }
+    .ellipsis-h2 {
+        -o-text-overflow: ellipsis;/*兼容opera*/
+        text-overflow: ellipsis;/*这就是省略号喽*/		  
+        overflow: hidden;/*设置超过的隐藏*/
+        white-space: nowrap;/*设置不折行*/
+    }
+    .red-h2 {
+        color: red;
+        font-weight: bold;
+        .money-span {
+            font-size: 12px;
+            font-weight: normal;
+        }
+    }
+    .item-ios {
+        border-bottom: 0.55px solid #c8c7cc;
+    }
+    .list-ios .item-block .item-inner {
+        border-bottom: none;
+    }
 }

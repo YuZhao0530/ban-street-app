@@ -32,8 +32,8 @@ export class HomePage {
     this.bannerSlidesEl.stopAutoplay();
   }
 
-  carpooling() {
-    this.navCtrl.push('CarpoolingPage');
+  findGoods(page) {
+    this.navCtrl.push(page);
   }
 
 }
