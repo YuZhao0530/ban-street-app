@@ -42,17 +42,17 @@
   <ion-list class="driver-list" *ngIf="type == 'driver'">
     <ion-item *ngFor="let driver of driversList;">
       <ion-label (click)="checkDetial(driver,'driver')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-time" color="danger"></ion-icon>
         <span>&nbsp;&nbsp;{{driver.departureTime}}&nbsp;&nbsp;</span>
         <span *ngIf="driver.model != '' && driver.model != null">{{driver.model}}-</span>
         <span>空余{{driver.seats}}座位</span><br>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-locate" color="secondary"></ion-icon>
         <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{driver.departureLocation}}</span><br>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-locate" color="primary"></ion-icon>
         <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{driver.destination}}</span>
       </ion-label>
       <button ion-button icon-only clear (click)="callPublisher(driver.tel)" item-end>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-call"></ion-icon>
       </button>
     </ion-item>
   </ion-list>

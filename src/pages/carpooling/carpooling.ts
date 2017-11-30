@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 途经地1 passBy1
  * 途经地2 passBy2
  * 备注 notes
- * 发布人  pulisher
+ * 发布人  publisher
  * 联系电话 tel
  * 
  * 顺风车 （ 乘客 passenger ） ：
@@ -49,7 +49,7 @@ export class CarpoolingPage {
       passBy1: '',
       passBy2: '',
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      pulisher: '张',
+      publisher: '张',
       tel: '13656562333',
       counts: 11056
     },
@@ -63,7 +63,7 @@ export class CarpoolingPage {
       passBy1: '',
       passBy2: '',
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      pulisher: '张',
+      publisher: '张',
       tel: '13656562333',
       counts: 11056
     },
@@ -77,7 +77,7 @@ export class CarpoolingPage {
       passBy1: '',
       passBy2: '',
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      pulisher: '张',
+      publisher: '张',
       tel: '13656562333',
       counts: 11056
     }
@@ -90,7 +90,7 @@ export class CarpoolingPage {
       departureTime: '2017-11-29 23：30',
       num: 2,
       notes: '哟有哟有哟有哟有哟有哟有哟有',
-      pulisher: '李',
+      publisher: '李',
       tel: '13656562333',
       counts: 11056
     },
@@ -101,7 +101,7 @@ export class CarpoolingPage {
       departureTime: '2017-11-29 23：30',
       num: 2,
       notes: '哟有哟有哟有哟有哟有哟有哟有',
-      pulisher: '张',
+      publisher: '张',
       tel: '13656562333',
       counts: 11056
     }
@@ -150,7 +150,7 @@ export class CarpoolingPage {
   }
 
   checkDetial(item, type) {
-    this.navCtrl.push('CarpoolingDetailPage', { item: item });
+    this.navCtrl.push('CarpoolingDetailPage', { item: item, type: type });
   }
 
 }

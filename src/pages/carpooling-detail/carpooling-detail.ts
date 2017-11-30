@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 途经地1 passBy1
  * 途经地2 passBy2
  * 备注 notes
- * 发布人  pulisher
+ * 发布人  publisher
  * 联系电话 tel
  * 
  * 顺风车 （ 乘客 passenger ） ：
@@ -29,7 +29,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 联系电话
  * 
  */
-
+let weui = require('../../assets/js/weui.js')
+declare var require;
 @IonicPage()
 @Component({
   selector: 'page-carpooling-detail',
@@ -37,13 +38,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CarpoolingDetailPage {
   item: any;
+  type: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.item = this.navParams.get("item");
+    this.type = this.navParams.get("type");
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarpoolingDetailPage');
+  }
+
+  callPublisher(tel) {
+    weui.confirm(tel, {
+      title: '是否拨打电话',
+      buttons: [{
+        label: '取消',
+        type: 'default',
+        onClick: function () { console.log('no') }
+      }, {
+        label: '拨打',
+        type: 'primary',
+        onClick: function () { console.log('yes') }
+      }]
+    });
   }
 
 }

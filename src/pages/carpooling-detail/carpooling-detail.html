@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CarpoolingDetail</ion-title>
+    <ion-title>详情</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,15 +16,15 @@
 <ion-content class="detail-content">
   <ion-item>
     <ion-label>
-      <ion-icon name="heart"></ion-icon>
+      <ion-icon name="ios-time" color="danger"></ion-icon>
       <span>&nbsp;&nbsp;{{item.departureTime}}&nbsp;&nbsp;</span>
       <span *ngIf="item.model && item.model != '' && item.model != null">{{item.model}}-</span>
       <span *ngIf="type == 'driver'">空余{{item.seats}}座位</span>
       <span *ngIf="type == 'passenger'">{{item.num}}人</span>
       <br>
-      <ion-icon name="heart"></ion-icon>
+      <ion-icon name="ios-locate" color="secondary"></ion-icon>
       <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{item.departureLocation}}</span><br>
-      <ion-icon name="heart"></ion-icon>
+      <ion-icon name="ios-locate" color="primary"></ion-icon>
       <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{item.destination}}</span>
     </ion-label>
   </ion-item>
@@ -36,7 +36,7 @@
     <p>{{item.notes}}</p>
   </ion-item>
   <ion-item>
-    <p>发布时间&nbsp;{{item.notes}}&nbsp;&nbsp;已有{{item.counts}}人浏览</p>
+    <p>发布时间&nbsp;{{item.departureTime}}&nbsp;&nbsp;已有{{item.counts}}人浏览</p>
   </ion-item>
 </ion-content>
 
@@ -49,15 +49,10 @@
             <p>{{item.publisher}}</p>
           </ion-item>
         </ion-col>
-        <ion-col col-3>
-          <ion-item>
-            <p>目的地</p>
-          </ion-item>
-        </ion-col>
-        <ion-col col-3>
-          <ion-item>
-            <p>时间</p>
-          </ion-item>
+        <ion-col class="button-col" (click)="callPublisher(item.tel)" col-6 text-center>
+          <button ion-button icon-left full>
+            <ion-icon name="ios-call">电话</ion-icon>
+          </button>
         </ion-col>
       </ion-row>
     </ion-grid>
