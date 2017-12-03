@@ -10,13 +10,14 @@ page-home {
         height: 166px;
     }
     .swiper-pagination-bullet-active {
-        background: #eb0b0b;
+        background: color($colors, primary) !important;
     }
     .m-grid {
         ion-row {
             ion-col {
+                margin-top: 16px;
                 ion-icon {
-                    font-size: 36px;
+                    font-size: 48px;
                 }
             }
         }

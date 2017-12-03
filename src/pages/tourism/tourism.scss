@@ -1,0 +1,17 @@
+page-tourism {
+    .ellipsis-h2 {
+        margin: 4px 0 0 0;
+        overflow : hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+    .item-ios {
+        border-bottom: 0.55px solid #c8c7cc;
+    }
+    .list-ios .item-block .item-inner {
+        border-bottom: none;
+    }
+}

@@ -51,6 +51,7 @@ export class CarpoolingPage {
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
       publisher: '张',
       tel: '13656562333',
+      createdDate: '2017-11-29',
       counts: 11056
     },
     {
@@ -65,6 +66,7 @@ export class CarpoolingPage {
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
       publisher: '张',
       tel: '13656562333',
+      createdDate: '2017-11-29',
       counts: 11056
     },
     {
@@ -79,6 +81,7 @@ export class CarpoolingPage {
       notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
       publisher: '张',
       tel: '13656562333',
+      createdDate: '2017-11-29',
       counts: 11056
     }
   ];
@@ -92,6 +95,7 @@ export class CarpoolingPage {
       notes: '哟有哟有哟有哟有哟有哟有哟有',
       publisher: '李',
       tel: '13656562333',
+      createdDate: '2017-11-29',
       counts: 11056
     },
     {
@@ -103,6 +107,7 @@ export class CarpoolingPage {
       notes: '哟有哟有哟有哟有哟有哟有哟有',
       publisher: '张',
       tel: '13656562333',
+      createdDate: '2017-11-29',
       counts: 11056
     }
   ];

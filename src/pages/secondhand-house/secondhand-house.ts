@@ -281,6 +281,10 @@ export class SecondhandHousePage {
     console.log('ionViewDidLoad SecondhandHousePage');
   }
 
+  detail(item) {
+    this.navCtrl.push('SecondhandHouseDetailPage', { item: item });
+  }
+
   searchItems() {
     this.filterKeywords.title = this.searchInput;
   }

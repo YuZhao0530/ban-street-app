@@ -18,6 +18,10 @@ page-carpooling-detail {
     .footer-grid {
         ion-item {
             padding: 0;
+            height: 100%;
+        }
+        .button-full-ios {
+            margin: 0;
         }
         .item-ios.item-block .item-inner {
             padding: 0;
@@ -25,7 +29,7 @@ page-carpooling-detail {
         }
         .item-ios p {
             color: black;
-            margin-left: 4px;
+            margin-left: 11px;
         }
         .item-ios p:first-child {
             color: #8e9093;

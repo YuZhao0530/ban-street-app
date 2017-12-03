@@ -1,14 +1,20 @@
 import { NgModule } from '@angular/core';
 import { SecondeHousePipe } from './secondhand-house.pipe';
+import { HousekeepingPipe } from './housekeeping.pipe';
+import { ConvenienceInfoPipe } from './convenience-info.pipe';
 
 @NgModule({
   declarations: [
-    SecondeHousePipe
+    SecondeHousePipe,
+    HousekeepingPipe,
+    ConvenienceInfoPipe
   ],
   imports: [
   ],
   exports: [
-    SecondeHousePipe
+    SecondeHousePipe,
+    HousekeepingPipe,
+    ConvenienceInfoPipe
   ]
 })
 export class PipesModule { }

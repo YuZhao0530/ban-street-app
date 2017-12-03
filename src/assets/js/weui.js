@@ -244,7 +244,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            type: 'primary',
 	            onClick: _util2.default.noop
 	        }],
-	        isAndroid: isAndroid
+	        isAndroid: false
 	    }, options);
 
 	    var $dialogWrap = (0, _util2.default)(_util2.default.render(_dialog2.default, options));
@@ -1342,7 +1342,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        menus: menus,
 	        actions: actions,
 	        className: '',
-	        isAndroid: isAndroid,
+	        isAndroid: false,
 	        onClose: _util2.default.noop
 	    }, options);
 	    var $actionSheetWrap = (0, _util2.default)(_util2.default.render(_actionSheet2.default, options));

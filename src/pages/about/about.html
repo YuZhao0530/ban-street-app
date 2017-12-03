@@ -1,11 +1,58 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-title (click)="showDate()">
       About
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-grid class="m-grid">
+        <ion-row text-center>
+          <ion-col>
+            <ion-icon name="heart"></ion-icon>
+            <p>二手车</p>
+          </ion-col>
+          <ion-col (click)="publish('SecondhandHousePage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>二手房</p>
+          </ion-col>
+          <ion-col (click)="publish('CarpoolingPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>顺风车</p>
+          </ion-col>
+        </ion-row>
+        <ion-row text-center>
+          <ion-col (click)="publish('HousekeepingPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>家政</p>
+          </ion-col>
+          <ion-col (click)="publish('InternetWorkPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>互联网</p>
+          </ion-col>
+          <ion-col (click)="publish('ConvenienceInfoPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>便民信息</p>
+          </ion-col>
+        </ion-row>
+        <ion-row text-center>
+          <ion-col (click)="publish('SecondhandGoodsPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>二手设备</p>
+          </ion-col>
+          <ion-col (click)="publish('TourismPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>周边旅游</p>
+          </ion-col>
+          <ion-col (click)="publish('MallPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>电商平台</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  <!-- <button ion-button (click)="openDatetime($event)" ></button>
+  <ion-datetime [hidden]="true" #aboutDatetime displayFormat="YYYY-MM-DDTHH:mm:ssTZD" minuteValues="0,15,30,45" pickerFormat="MM DD HH mm" [(ngModel)]="myDate"></ion-datetime>
+  <p>{{myDate | date: 'yyyy-MM-dd HH:mm'}}</p>
+  <p>{{myDate}}</p> -->
 </ion-content>

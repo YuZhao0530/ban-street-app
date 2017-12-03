@@ -31,7 +31,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of (itemList | secondhandHouseFilter: filterKeywords);">
+    <ion-item *ngFor="let item of (itemList | secondhandHouseFilter: filterKeywords);" (click)="detail(item)">
       <ion-thumbnail item-start>
         <img [src]="item.photos[0]">
       </ion-thumbnail>

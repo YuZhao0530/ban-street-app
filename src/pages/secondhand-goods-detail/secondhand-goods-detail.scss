@@ -1,0 +1,31 @@
+page-secondhand-goods-detail {
+    .red-h2 {
+        color: red;
+        font-weight: bold;
+        .money-span {
+            font-size: 12px;
+            font-weight: normal;
+        }
+    }
+    .photos-slides {
+        height: 200px;
+    }
+    .swiper-pagination-bullet-active {
+        background: color($colors, primary) !important;
+    }
+    .col {
+        padding: 8px 0;
+    }
+    .row {
+        border-top: 1px solid color($colors,border);
+    }
+    .first-row {
+        border-top: none;
+    }
+    .no-text-divider {
+        height: 12px;
+    }
+    ion-footer .button-full-ios {
+        margin: 0;
+    }
+}
