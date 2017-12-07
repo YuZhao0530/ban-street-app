@@ -26,6 +26,7 @@ page-carpooling {
         }
     }
     .driver-list {
+        margin: 0;
         ion-item {
             font-size: 12px;
         }
@@ -34,6 +35,9 @@ page-carpooling {
         }
         .label-ios {
             margin: 11px 8px;
+        }
+        .item-ios,.item-ios:last-child {
+            border-bottom: 1px solid #c8c7cc;
         }
     }
 }

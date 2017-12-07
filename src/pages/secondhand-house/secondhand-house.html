@@ -16,8 +16,8 @@
         {{filterKeywords.price.label != '' ? filterKeywords.price.label : defaltKeywords.price}}
         <ion-icon name="md-arrow-dropdown"></ion-icon>
       </ion-col>
-      <ion-col (click)="openSinglePicker('structure')">
-        {{filterKeywords.structure.label != '' ? filterKeywords.structure.label : defaltKeywords.structure}}
+      <ion-col (click)="openSinglePicker('bedroom')">
+        {{filterKeywords.bedroom.label != '' ? filterKeywords.bedroom.label : defaltKeywords.bedroom}}
         <ion-icon name="md-arrow-dropdown"></ion-icon>
       </ion-col>
       <ion-col (click)="openMultiPicker()">
@@ -31,15 +31,19 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of (itemList | secondhandHouseFilter: filterKeywords);" (click)="detail(item)">
+    <ion-item *ngFor="let item of (list | secondhandHouseFilter: filterKeywords);" (click)="detail(item)">
       <ion-thumbnail item-start>
-        <img [src]="item.photos[0]">
+        <img *ngIf="item.photos" [src]="item.photos[0]">
+        <img *ngIf="!item.photos" src="assets/imgs/logo.png">
       </ion-thumbnail>
       <h2 class="ellipsis-h2">{{item.title}}</h2>
       <p>{{item.floor}}层 | 朝向 {{item.towards}} | {{item.decoration}}</p>
-      <p>{{item.structure[0]}}室{{item.structure[1]}}厅{{item.structure[2]}}卫</p>
+      <p>{{item.bedroom}}室{{item.parlor}}厅{{item.bathroom}}卫</p>
       <h2 class="red-h2">{{item.price}}<span class="money-span">万</span></h2>
     </ion-item>
-    <div text-center>No more data is available.</div>
+    <div *ngIf="noMore" text-center>没有更多数据了.</div>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="moreList($event)" *ngIf="page < totalPage">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

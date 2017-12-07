@@ -14,11 +14,12 @@
 
 
 <ion-content class="m-content">
-  <ion-slides class="photos-slides" pager="true">
+  <ion-slides *ngIf="item.photos" class="photos-slides" pager="true">
     <ion-slide *ngFor="let photo of item.photos">
       <img [src]="photo">
     </ion-slide>
   </ion-slides>
+  <img class="photos-slides" *ngIf="!item.photos" src="assets/imgs/logo.png">
   <div padding>
     <h1>{{item.title}}</h1>
     <ion-row class="info-row" text-center>
@@ -28,7 +29,7 @@
       </ion-col>
       <ion-col>
         <p class="label-p">户型</p>
-        <p class="content-p">{{item.structure[0]}}室{{item.structure[1]}}厅{{item.structure[2]}}卫</p>
+        <p class="content-p">{{item.bedroom}}室{{item.parlor}}厅{{item.bathroom}}卫</p>
       </ion-col>
       <ion-col>
         <p class="label-p">面积</p>

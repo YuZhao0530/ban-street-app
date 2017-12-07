@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Events } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
+import { HomeServicesProvider } from '../../providers/home-services/home-services';
 /**
  * Generated class for the CarpoolingPage page.
  *
@@ -13,8 +15,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 出发时间 departureTime
  * 空余座位 seats
  * 车型 model
- * 途经地1 passBy1
- * 途经地2 passBy2
  * 备注 notes
  * 发布人  publisher
  * 联系电话 tel
@@ -38,85 +38,79 @@ declare var require;
 })
 export class CarpoolingPage {
   type: string;
-  driversList = [
-    {
-      id: 0,
-      departureLocation: 'XXXX小区',
-      destination: 'BBBB城',
-      departureTime: '2017-11-29 23：30',
-      seats: 4,
-      model: 'SUV',
-      passBy1: '',
-      passBy2: '',
-      notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      publisher: '张',
-      tel: '13656562333',
-      createdDate: '2017-11-29',
-      counts: 11056
-    },
-    {
-      id: 1,
-      departureLocation: 'AAAA小区',
-      destination: 'SSSS城',
-      departureTime: '2017-11-29 23：30',
-      seats: 4,
-      model: 'SUV',
-      passBy1: '',
-      passBy2: '',
-      notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      publisher: '张',
-      tel: '13656562333',
-      createdDate: '2017-11-29',
-      counts: 11056
-    },
-    {
-      id: 0,
-      departureLocation: 'BBBB小区',
-      destination: 'SSSS城',
-      departureTime: '2017-11-29 23：30',
-      seats: 4,
-      model: 'SUV',
-      passBy1: '',
-      passBy2: '',
-      notes: '哟有哟有哟有哟有哟有哟有哟有哟有哟有哟有',
-      publisher: '张',
-      tel: '13656562333',
-      createdDate: '2017-11-29',
-      counts: 11056
-    }
-  ];
-  passengersList = [
-    {
-      id: 0,
-      departureLocation: 'RRRR小区',
-      destination: 'SSTT城',
-      departureTime: '2017-11-29 23：30',
-      num: 2,
-      notes: '哟有哟有哟有哟有哟有哟有哟有',
-      publisher: '李',
-      tel: '13656562333',
-      createdDate: '2017-11-29',
-      counts: 11056
-    },
-    {
-      id: 0,
-      departureLocation: 'TTT小区',
-      destination: 'SSSS城',
-      departureTime: '2017-11-29 23：30',
-      num: 2,
-      notes: '哟有哟有哟有哟有哟有哟有哟有',
-      publisher: '张',
-      tel: '13656562333',
-      createdDate: '2017-11-29',
-      counts: 11056
-    }
-  ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  driversList = [];
+  passengersList = [];
+  list = [];
+  page = 1;
+  totalPage = 1;
+  noMore = false;
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public homeServices: HomeServicesProvider,
+    public events: Events,
+    private callNumber: CallNumber
+  ) {
+    events.subscribe('carpoolingFiltered:not enough items', () => {
+      if (this.page < this.totalPage) {
+        this.moreList(null);
+      }
+    });
     this.type = 'driver';
+    this.getList();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarpoolingPage');
+  }
+
+  getList() {
+    this.page = 1;
+    this.homeServices.getCarpoolingList(this.page).then(
+      (res) => {
+        this.list = res.result;
+        res.result.filter((item) => {
+          if(item.type == 'driver'){
+            this.driversList.push(item);
+          }else if(item.type == 'passenger'){
+            this.passengersList.push(item);
+          }
+        });
+        this.totalPage =  Math.ceil(parseInt(res.totalPage) / 10);
+        if(this.totalPage < 2){
+          this.noMore = true;
+        }else{
+          if (this.driversList.length < 20 || this.passengersList.length < 20 ) {
+            this.events.publish('carpoolingFiltered:not enough items');
+          }
+        }
+        console.log('totalPage',this.totalPage);
+      }
+    );
+  }
+
+  async moreList(infiniteScroll) {
+    console.log('more list');
+    this.page++;
+    if(this.page == this.totalPage){
+      this.noMore = true;
+    } 
+    await this.homeServices.getCarpoolingList(this.page).then(
+      (res) => {
+        res.result.filter((item) => {
+          if(item.type == 'driver'){
+            this.driversList.push(item);
+          }else if(item.type == 'passenger'){
+            this.passengersList.push(item);
+          }
+        });
+        if (this.driversList.length < 20 || this.passengersList.length < 20 ) {
+          this.events.publish('carpoolingFiltered:not enough items');
+        }
+        if(infiniteScroll){
+          infiniteScroll.complete();
+        }
+      }
+    );
   }
 
   changeType() {
@@ -149,7 +143,11 @@ export class CarpoolingPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

@@ -59,17 +59,21 @@
   <ion-list class="driver-list" *ngIf="type == 'passenger'">
     <ion-item *ngFor="let passenger of passengersList;">
       <ion-label (click)="checkDetial(passenger,'passenger')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-time" color="danger"></ion-icon>
         <span>&nbsp;&nbsp;{{passenger.departureTime}}&nbsp;&nbsp;</span>
         <span>{{passenger.num}}人</span><br>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-locate" color="secondary"></ion-icon>
         <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{passenger.departureLocation}}</span><br>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-locate" color="primary"></ion-icon>
         <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{passenger.destination}}</span>
       </ion-label>
       <button ion-button icon-only clear (click)="callPublisher(passenger.tel)" item-end>
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-call"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
+  <div *ngIf="noMore" text-center>没有更多数据了.</div>
+  <ion-infinite-scroll (ionInfinite)="moreList($event)" *ngIf="page < totalPage">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -1,0 +1,82 @@
+<!--
+  Generated template for the PublishSecondhandHousePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>二手房发布</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-item>
+      <ion-label>标题</ion-label>
+      <ion-input type="text" [(ngModel)]="item.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>地址</ion-label>
+      <ion-input type="text" [(ngModel)]="item.address"></ion-input>
+    </ion-item>
+    <ion-item (click)="chooseStructure()">
+      <ion-label>
+        厅室
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;{{structureForShow}}</span>
+      </ion-label>
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>面积</ion-label>
+      <ion-input type="number" [(ngModel)]="item.area"></ion-input>
+      <span item-end>m²</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>期望售价</ion-label>
+      <ion-input type="number" [(ngModel)]="item.price"></ion-input>
+      <span item-end>万</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>楼层</ion-label>
+      <ion-input type="number" [(ngModel)]="item.floor"></ion-input>
+      <span item-end>层</span>
+    </ion-item>
+    <ion-item (click)="chooseTowards()">
+      <ion-label>
+        朝向
+        <span item-end>&nbsp;&nbsp;{{item.towards}}</span>
+      </ion-label>
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="chooseDecoration()">
+      <ion-label>
+        装修
+        <span item-end>&nbsp;&nbsp;{{item.decoration}}</span>
+      </ion-label>
+      <ion-icon name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item>
+      <ion-label>联系人</ion-label>
+      <ion-input type="text" [(ngModel)]="item.publisher"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>联系电话</ion-label>
+      <ion-input type="number" [(ngModel)]="item.tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>描述</ion-label>
+      <ion-textarea maxlength="255" [(ngModel)]="item.notes"></ion-textarea>
+    </ion-item>
+    <p padding>相关图片 {{imageArray && imageArray.length}}/5</p>
+    <div *ngFor="let url of imageArray;" class="image-picker" text-center>
+      <img [src]="url" (click)="imageViewer(url)" />
+    </div>
+    <div *ngIf="imageArray && imageArray.length < 5" (click)="pickPicture()" class="image-picker" text-center>
+      <ion-icon name="ios-add"></ion-icon>
+    </div>
+    <div padding>
+      <button ion-button full round (click)="showItem()">提交</button>
+    </div>
+</ion-content>

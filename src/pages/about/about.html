@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-title (click)="showDate()">
-      About
+    <ion-title>
+      发布
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-grid class="m-grid">
         <ion-row text-center>
           <ion-col>
@@ -41,13 +41,13 @@
             <ion-icon name="heart"></ion-icon>
             <p>二手设备</p>
           </ion-col>
-          <ion-col (click)="publish('TourismPage')">
-            <ion-icon name="heart"></ion-icon>
-            <p>周边旅游</p>
-          </ion-col>
           <ion-col (click)="publish('MallPage')">
             <ion-icon name="heart"></ion-icon>
             <p>电商平台</p>
+          </ion-col>
+          <ion-col style="visibility:hidden;" (click)="publish('TourismPage')">
+            <ion-icon name="heart"></ion-icon>
+            <p>周边旅游</p>
           </ion-col>
         </ion-row>
       </ion-grid>

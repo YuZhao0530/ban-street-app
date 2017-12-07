@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { LoadingController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+import { HomeServicesProvider } from '../../providers/home-services/home-services';
 /**
  * Generated class for the SecondhandHousePage page.
  *
@@ -10,7 +12,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 二手房 secondhandHouse :
  * 标题 title
  * 地址 address
- * 户型 structure { 室 厅 卫 }
+ * 户型 structure parlor bathroom
  * 面积 area
  * 期望售价 price
  * 楼层 floor
@@ -35,7 +37,7 @@ export class SecondhandHousePage {
       id: 0,
       title: 'XXXX卖二手房',
       address: 'SSS路XXX小区',
-      structure: [3,2,1],
+      structure: [3, 2, 1],
       area: 96,
       price: 50,
       floor: 7,
@@ -44,13 +46,13 @@ export class SecondhandHousePage {
       notes: '介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍',
       publisher: '张',
       tel: '13635358888',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
+      photos: ['assets/imgs/logo.png', 'assets/imgs/logo.png', 'assets/imgs/logo.png'],
     },
     {
       id: 0,
       title: 'AAXX卖二手房',
       address: 'S路XXX小区',
-      structure: [2,1,1],
+      structure: [2, 1, 1],
       area: 96,
       price: 20,
       floor: 3,
@@ -59,13 +61,13 @@ export class SecondhandHousePage {
       notes: '介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍',
       publisher: '张',
       tel: '13635358888',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
+      photos: ['assets/imgs/logo.png', 'assets/imgs/logo.png', 'assets/imgs/logo.png'],
     },
     {
       id: 0,
       title: 'XBX卖二手房',
       address: 'XASX路DDXX小区',
-      structure: [1,1,1],
+      structure: [1, 1, 1],
       area: 96,
       price: 70,
       floor: 4,
@@ -74,13 +76,13 @@ export class SecondhandHousePage {
       notes: '介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍',
       publisher: '张',
       tel: '13635358888',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
+      photos: ['assets/imgs/logo.png', 'assets/imgs/logo.png', 'assets/imgs/logo.png'],
     },
     {
       id: 0,
       title: 'XXNMX卖二手房',
       address: 'XLKKK路XOO小区',
-      structure: [5,2,1],
+      structure: [5, 2, 1],
       area: 96,
       price: 90,
       floor: 3,
@@ -89,13 +91,13 @@ export class SecondhandHousePage {
       notes: '介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍',
       publisher: '张',
       tel: '13635358888',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
+      photos: ['assets/imgs/logo.png', 'assets/imgs/logo.png', 'assets/imgs/logo.png'],
     },
     {
       id: 0,
       title: 'XXTYH卖二手房',
       address: 'XIK路XJJJX小区',
-      structure: [3,2,1],
+      structure: [3, 2, 1],
       area: 96,
       price: 130,
       floor: 3,
@@ -104,21 +106,21 @@ export class SecondhandHousePage {
       notes: '介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍',
       publisher: '张',
       tel: '13635358888',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
+      photos: ['assets/imgs/logo.png', 'assets/imgs/logo.png', 'assets/imgs/logo.png'],
     },
   ];
   searchInput = '';
   filterKeywords = {
     title: '',
     price: { label: '', value: undefined },
-    structure: { label: '', value: undefined },
+    bedroom: { label: '', value: undefined },
     floor: { label: '', value: undefined },
     towards: { label: '', value: undefined },
     decoration: { label: '', value: undefined }
   };
   defaltKeywords = {
     price: '总价',
-    structure: '厅室'
+    bedroom: '厅室'
   };
   dataForSinglePicker = {
     price: [
@@ -147,7 +149,7 @@ export class SecondhandHousePage {
         value: 121
       }
     ],
-    structure: [
+    bedroom: [
       {
         label: '不限',
         value: 0
@@ -274,11 +276,62 @@ export class SecondhandHousePage {
       }
     ]
   ];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  list = [];
+  page = 1;
+  totalPage = 1;
+  noMore = false;
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public homeServices: HomeServicesProvider,
+    public events: Events
+  ) {
+    this.getList();
+    events.subscribe('secondhandHouseFiltered:not enough items', () => {
+      if (this.page < this.totalPage) {
+        this.moreList(null);
+      }
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SecondhandHousePage');
+  }
+
+  getList() {
+    this.page = 1;
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '加载中...'
+    });
+    loading.present();
+    this.homeServices.getSecondhandHouseList(this.page).then(
+      (res) => {
+        this.list = res.result;
+        this.totalPage = Math.ceil(parseInt(res.totalPage) / 20);
+        if(this.totalPage < 2){
+          this.noMore = true;
+        }
+        loading.dismiss();
+        console.log('totalPage', this.totalPage);
+      }
+    );
+  }
+
+  moreList(infiniteScroll) {
+    console.log('more list');
+    this.page++;
+    if(this.page == this.totalPage){
+      this.noMore = true;
+    }
+    this.homeServices.getSecondhandHouseList(this.page).then(
+      (res) => {
+        this.list = this.list.concat(res.result);
+        if (infiniteScroll) {
+          infiniteScroll.complete();
+        }
+      }
+    );
   }
 
   detail(item) {
@@ -308,7 +361,7 @@ export class SecondhandHousePage {
       }
     );
   }
-  
+
   openMultiPicker() {
     weui.picker(
       this.dataForMultiPicker[0],

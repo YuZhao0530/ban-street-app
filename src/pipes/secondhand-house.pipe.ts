@@ -1,14 +1,16 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { Events } from 'ionic-angular';
 
 @Pipe({
     name: "secondhandHouseFilter",
     pure: false
 })
 export class SecondeHousePipe implements PipeTransform {
-
+    filteredItems = [];
+    constructor(public events: Events) {}
     transform(items: Array<any>, conditions: any): Array<any> {
-        return items.filter(item => {
-            // console.log(item.structure[0], conditions.structure.value);
+        this.filteredItems = items.filter(item => {
+            // console.log(item.bedroom[0], conditions.bedroom.value);
             if (item.title.indexOf(conditions.title) < 0) {
                 return false
             }
@@ -20,11 +22,11 @@ export class SecondeHousePipe implements PipeTransform {
                     return false
                 }
             }
-            if (conditions.structure.value != undefined) {
-                if (item.structure[0] < 5 && conditions.structure.value > 4) {
+            if (conditions.bedroom.value != undefined) {
+                if (item.bedroom < 5 && conditions.bedroom.value > 4) {
                     return false
                 }
-                if (item.structure[0] != conditions.structure.value && conditions.structure.value < 5) {
+                if (item.bedroom != conditions.bedroom.value && conditions.bedroom.value < 5) {
                     return false
                 }
             }
@@ -49,5 +51,10 @@ export class SecondeHousePipe implements PipeTransform {
             }
             return true
         });
+        console.log('filter happened');
+        if(this.filteredItems.length < 20) {
+            this.events.publish('secondhandHouseFiltered:not enough items');
+        }
+        return this.filteredItems
     }
 }

@@ -2,14 +2,24 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { HttpModule } from '@angular/http';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { PipesModule } from '../pipes/pipes.module';
 
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CallNumber } from '@ionic-native/call-number';
+import { HomeServicesProvider } from '../providers/home-services/home-services';
+import { HttpServicesProvider } from '../providers/http-services/http-services';
+import { PublishServicesProvider } from '../providers/publish-services/publish-services';
 
 @NgModule({
   declarations: [
@@ -20,6 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     PipesModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
@@ -39,7 +50,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HomeServicesProvider,
+    HttpServicesProvider,
+    CallNumber,
+    File,
+    FileTransfer,
+    Transfer,
+    Camera,
+    FilePath,
+    PublishServicesProvider
   ]
 })
 export class AppModule {}

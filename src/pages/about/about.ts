@@ -30,4 +30,8 @@ export class AboutPage {
     console.log(this.myDate);
     this.aboutDatetime._click(ev);
   }
+
+  publish(page){
+    this.navCtrl.push('Publish' + page);
+  }
 }

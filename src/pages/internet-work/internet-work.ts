@@ -9,7 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 互联网 InternetWork
  * 
  * 标题 title
- * 类型 type
+ * 类型 poster
  * 地址 address
  * 联系人 contact
  * 电话 tel
