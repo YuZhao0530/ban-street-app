@@ -1,0 +1,39 @@
+modal-list {
+    .toolbar-background {
+        background-color: white;
+    }
+    .toolbar-ios {
+        padding-left: 16px;
+    }
+    .modal-content {
+        .item {
+            padding: 0;
+        }
+    }
+    .modal-list {
+        .list-ios {
+            margin: 0;
+        }
+        .list-ios>.item-block:first-child {
+            border-top: none;
+        }
+        .list-ios>.item-block:last-child {
+            border-bottom: none;
+        }
+        .input-wrapper {
+            font-size: 14px;
+        }
+        .item-ios [item-left], .item-ios [item-start] {
+            margin: 0 0 0 16px;
+        }
+        .search-result-header {
+            border-bottom: 0.55px solid #c8c7cc;
+            .item-inner {
+                border-bottom: none;
+            }
+        }
+    }
+    .label {
+        margin: 0 0 0 16px;
+    }
+}

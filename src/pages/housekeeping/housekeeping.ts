@@ -256,7 +256,7 @@ export class HousekeepingPage {
   }
 
   openList(type) {
-    this.navCtrl.push('HousekeepingListPage', { list: this.moveHouseList });
+    this.navCtrl.push('HousekeepingListPage', { dataType: type });
   }
 
 }

@@ -1,21 +1,48 @@
 <ion-header>
-  
-    <ion-navbar>
-      <ion-title>camera</ion-title>
-    </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content padding>
-  
-    <button ion-button (click)="openCamera()">打开摄像头</button>
-    <button ion-button (click)="upload()">文件上传</button>
-    <button ion-button (click)="download()">文件下载</button>
-  
-    <div>
-      <img [src]="path" />
-      <img *ngFor="let url of imageArray;" [src]="url" (click)="imageViewer(url)" />
-    </div>
-  
-  </ion-content>
+
+  <ion-navbar>
+    <ion-title>{{user.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div text-center class="top-container">
+    <ion-grid>
+      <ion-col (click)="openAccountInfo()">
+        <ion-icon *ngIf="!user.photo" name="ios-bans-person"></ion-icon>
+        <img *ngIf="user.photo" [src]="user.photo">
+      </ion-col>
+    </ion-grid>
+  </div>
+  <div class="m-container">
+    <ion-item (click)="openPublishList()">
+      <ion-icon item-start color="primary" name="ios-list-outline"></ion-icon>
+      <h6>我的发布</h6>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </div>
+  <div class="m-container">
+    <!-- <ion-item (click)="openAppInfo()">
+      <ion-icon item-start name="heart"></ion-icon>
+      <h6>应用信息</h6>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item> -->
+    <ion-item (click)="openAdvices()">
+      <ion-icon item-start color="primary" name="ios-bulb-outline"></ion-icon>
+      <h6>意见反馈</h6>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="openAboutUs()">
+      <ion-icon item-start color="primary" name="ios-at-outline"></ion-icon>
+      <h6>关于我们</h6>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="openSettings()">
+      <ion-icon item-start color="primary" name="ios-settings-outline"></ion-icon>
+      <h6>设置</h6>
+      <ion-icon name="arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </div>
+</ion-content>

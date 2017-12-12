@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
-import { HomeServicesProvider } from '../../providers/home-services/home-services';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -26,8 +25,9 @@ export class HomePage {
   ];
   @ViewChild('bannerSlidesEl') bannerSlidesEl:any;
 
-  constructor(public navCtrl: NavController, public homeServices: HomeServicesProvider) {
-    this.homeServices.getCarpoolingList(1);
+  constructor(
+    public navCtrl: NavController, 
+    public modalCtrl: ModalController) {
   }
 
   ionViewDidEnter(){
@@ -37,6 +37,11 @@ export class HomePage {
 
   ionViewDidLeave(){
     this.bannerSlidesEl.stopAutoplay();
+  }
+
+  openHomeSearch() {
+    let homeSearchModal = this.modalCtrl.create('HomeSearch');
+    homeSearchModal.present();
   }
 
   findGoods(page) {

@@ -16,7 +16,7 @@
   <ion-list>
     <ion-item *ngFor="let item of (list | housekeepingFilter: filterKeywords);">
       <ion-thumbnail (click)="detail(item)" item-start>
-        <img [src]="item.poster">
+        <img [src]="item.photos[0]">
       </ion-thumbnail>
       <ion-label (click)="detail(item)">
         <h2 class="ellipsis-h2">{{item.title}}</h2>
@@ -26,6 +26,9 @@
         <ion-icon name="ios-call"></ion-icon>
       </button>
     </ion-item>
-    <div text-center>No more data is available.</div>
+    <div *ngIf="noMore" text-center>没有更多数据了.</div>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="moreList($event)" *ngIf="page < totalPage">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载中..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the SecondhandHouseDetailPage page.
  *
@@ -31,7 +31,11 @@ declare var require;
 })
 export class SecondhandHouseDetailPage {
   item: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private callNumber: CallNumber
+  ) {
     this.item = navParams.get('item');
   }
 
@@ -39,7 +43,7 @@ export class SecondhandHouseDetailPage {
     console.log('ionViewDidLoad SecondhandHouseDetailPage');
   }
 
-  callPublisher(tel) {
+  callContact(tel) {
     weui.confirm(tel, {
       title: '是否拨打电话',
       buttons: [{
@@ -49,7 +53,11 @@ export class SecondhandHouseDetailPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

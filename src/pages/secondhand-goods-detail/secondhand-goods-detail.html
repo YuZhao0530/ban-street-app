@@ -24,7 +24,7 @@
     <h2 class="red-h2">￥{{item.price}}</h2>
     <ion-row class="first-row">
       <ion-col text-left>
-        <span>发布时间&nbsp;{{item.createdDate}}</span>
+        <span>发布时间&nbsp;{{item.createdDate | date:'yyyy/MM/dd'}}</span>
       </ion-col>
       <ion-col text-right>
         <span>已有{{item.counts}}浏览</span>

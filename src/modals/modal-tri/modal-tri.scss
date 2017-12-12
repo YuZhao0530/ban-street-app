@@ -1,0 +1,20 @@
+modal-tri {
+    .item-ios {
+        border-bottom: 1px solid #c8c7cc;
+    }
+    ion-slide.swiper-slide {
+        align-items: flex-start;
+    }
+    ion-slides {
+        .slide-zoom {
+            height:100%;
+            overflow-y: auto;
+            .list-ios {
+                margin: 0;
+            }
+        }
+    }
+    .item-ios.item-block .item-inner {
+        border-bottom: none;
+    }
+}

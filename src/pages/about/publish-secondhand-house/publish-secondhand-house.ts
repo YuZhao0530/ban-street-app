@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
-import { stringify } from 'qs';
 import { PublishServicesProvider } from '../../../providers/publish-services/publish-services';
 /**
  * Generated class for the PublishSecondhandHousePage page.
@@ -45,15 +43,16 @@ export class PublishSecondhandHousePage {
     towards: '',
     decoration: '',
     notes: '',
-    publisher: '',
-    tel: '',
+    publisher: JSON.parse(localStorage.getItem('userInfo')).id,
+    contact: JSON.parse(localStorage.getItem('userInfo')).name,
+    tel: JSON.parse(localStorage.getItem('userInfo')).tel
   };
   labelForShow = {
     title: '标题',
     address: '地址',
-    bedroom: '厅室',
-    parlor: '厅室',
-    bathroom: '厅室',
+    // bedroom: '厅室',
+    // parlor: '厅室',
+    // bathroom: '厅室',
     area: '面积',
     price: '期望售价',
     floor: '楼层',
@@ -75,9 +74,8 @@ export class PublishSecondhandHousePage {
     public publishService: PublishServicesProvider,
     public loadingCtrl: LoadingController,
     private camera: Camera,
-    private transfer: FileTransfer, private file: File
+    private transfer: FileTransfer
   ) {
-
   }
 
   ionViewDidLoad() {
@@ -90,6 +88,7 @@ export class PublishSecondhandHousePage {
       (res) => {
         console.log('success',JSON.stringify(res));
         loading.dismiss();
+        weui.toast('发布成功', 1500);
         this.navCtrl.pop();
       }
     );
@@ -182,6 +181,16 @@ export class PublishSecondhandHousePage {
 
   showItem() {
     let l = Object.keys(this.item);
+    if(this.structureForShow == ''){
+      weui.topTips('请填写正确的厅室', {
+        duration: 2000,
+        className: "custom-classname",
+        callback: function () {
+          console.log('厅室');
+        }
+      });
+      return false
+    }
     for (let i = 0; i < l.length; i++) {
       if (this.item[l[i]] == '') {
         weui.topTips('请填写正确的' + this.labelForShow[l[i]], {
@@ -191,7 +200,7 @@ export class PublishSecondhandHousePage {
             console.log('close');
           }
         });
-        break
+        return false
       }
     }
     if(this.imageArray.length < 1){
@@ -202,6 +211,7 @@ export class PublishSecondhandHousePage {
           console.log('close');
         }
       });
+      return false
     }
     this.upload();
   }

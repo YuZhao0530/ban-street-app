@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
+import { Events } from 'ionic-angular';
+import { HomeServicesProvider } from '../../providers/home-services/home-services';
 
 /**
  * Generated class for the InternetWorkPage page.
@@ -9,9 +12,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * 互联网 InternetWork
  * 
  * 标题 title
- * 类型 poster
  * 地址 address
- * 联系人 contact
+ * 商家名称 contact
  * 电话 tel
  * 详细描述 notes
  * counts
@@ -25,38 +27,69 @@ declare var require;
   templateUrl: 'internet-work.html',
 })
 export class InternetWorkPage {
-  list = [
-    {
-      title: '互联网标题标题标标题标标题标标题标标题标标题标标题标标标标',
-      poster: 'assets/imgs/logo.png',
-      address: '地址地址地址地址地址',
-      contact: '张',
-      tel: '13666553333',
-      notes: '详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述',
-      createdDate: '2017-11-29',
-      counts: 10533,
-    },
-    {
-      title: '互联网搜索搜索标索标索标索标索标索标题标题标题标题',
-      poster: 'assets/imgs/logo.png',
-      address: '地址地址地址地址地址',
-      contact: '张',
-      tel: '13666553333',
-      notes: '详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述详细描述',
-      createdDate: '2017-11-29',
-      counts: 10533,
-    }
-  ];
+  list = [];
   filterKeywords = {
     title: ''
   };
   searchInput = '';
+  page = 1;
+  totalPage = 1;
+  noMore = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public homeServices: HomeServicesProvider,
+    private callNumber: CallNumber,
+    public events: Events
+  ) {
+    events.subscribe('housekeepingFiltered:not enough items', () => {
+      if (this.page < this.totalPage) {
+        this.moreList(null);
+      }
+    });
+    this.getList();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InternetWorkPage');
+  }
+
+  getList() {
+    this.page = 1;
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '加载中...'
+    });
+    loading.present();
+    this.homeServices.getInternetWorkList(this.page).then(
+      (res) => {
+        this.list = res.result;
+        this.totalPage = Math.ceil(parseInt(res.totalPage) / 20);
+        if(this.totalPage < 2){
+          this.noMore = true;
+        }
+        loading.dismiss();
+        console.log('totalPage', this.totalPage);
+      }
+    );
+  }
+
+  moreList(infiniteScroll) {
+    console.log('more list');
+    this.page++;
+    if(this.page == this.totalPage){
+      this.noMore = true;
+    }
+    this.homeServices.getInternetWorkList(this.page).then(
+      (res) => {
+        this.list = this.list.concat(res.result);
+        if (infiniteScroll) {
+          infiniteScroll.complete();
+        }
+      }
+    );
   }
 
   searchItems() {
@@ -77,7 +110,11 @@ export class InternetWorkPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

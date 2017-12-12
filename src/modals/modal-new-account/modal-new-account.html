@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="slidePrev()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            新用户
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="inputs-container">
+        <ion-item>
+            <ion-input type="text" placeholder="昵称" clearInput maxlength="6" [(ngModel)]="item.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="tel" placeholder="手机" clearInput maxlength="11" [(ngModel)]="item.tel"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="number" maxlength="4" placeholder="验证码" clearInput [(ngModel)]="item.smscode"></ion-input>
+            <button ion-button [disabled]="smsCodeCounts != 60" (click)="getSmsCode()" item-end>{{smsCodeText}}</button>
+        </ion-item>
+        <ion-item>
+            <ion-input type="{{pwdType}}" placeholder="密码" clearInput [(ngModel)]="pwd"></ion-input>
+            <button *ngIf="showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()">
+                <ion-icon name="ios-eye-outline"></ion-icon>
+            </button>
+            <button *ngIf="!showPass" ion-button clear color="dark" type="button" item-right (click)="showPassword()">
+                <ion-icon name="ios-eye-off-outline"></ion-icon>
+            </button>
+        </ion-item>
+    </div>
+    <div class="button-container">
+        <button ion-button full round [disabled]="pwd == '' || item.tel == '' || item.name == '' || item.smscode == ''" (click)="showItem()">注册</button>
+    </div>
+</ion-content>

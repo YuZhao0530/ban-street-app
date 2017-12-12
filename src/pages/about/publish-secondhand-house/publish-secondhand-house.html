@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>二手房发布</ion-title>
+    <ion-title>二手房</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,11 +15,11 @@
 <ion-content>
     <ion-item>
       <ion-label>标题</ion-label>
-      <ion-input type="text" [(ngModel)]="item.title"></ion-input>
+      <ion-input type="text" clearInput [(ngModel)]="item.title"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>地址</ion-label>
-      <ion-input type="text" [(ngModel)]="item.address"></ion-input>
+      <ion-input type="text" clearInput [(ngModel)]="item.address"></ion-input>
     </ion-item>
     <ion-item (click)="chooseStructure()">
       <ion-label>
@@ -30,17 +30,17 @@
     </ion-item>
     <ion-item>
       <ion-label>面积</ion-label>
-      <ion-input type="number" [(ngModel)]="item.area"></ion-input>
+      <ion-input type="number" clearInput [(ngModel)]="item.area"></ion-input>
       <span item-end>m²</span>
     </ion-item>
     <ion-item>
       <ion-label>期望售价</ion-label>
-      <ion-input type="number" [(ngModel)]="item.price"></ion-input>
+      <ion-input type="number" clearInput [(ngModel)]="item.price"></ion-input>
       <span item-end>万</span>
     </ion-item>
     <ion-item>
       <ion-label>楼层</ion-label>
-      <ion-input type="number" [(ngModel)]="item.floor"></ion-input>
+      <ion-input type="number" clearInput [(ngModel)]="item.floor"></ion-input>
       <span item-end>层</span>
     </ion-item>
     <ion-item (click)="chooseTowards()">
@@ -59,11 +59,11 @@
     </ion-item>
     <ion-item>
       <ion-label>联系人</ion-label>
-      <ion-input type="text" [(ngModel)]="item.publisher"></ion-input>
+      <ion-input type="text" clearInput [(ngModel)]="item.contact"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>联系电话</ion-label>
-      <ion-input type="number" [(ngModel)]="item.tel"></ion-input>
+      <ion-input type="number" clearInput [(ngModel)]="item.tel"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>描述</ion-label>

@@ -1,55 +1,61 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-searchbar placeholder="找二手车 找房子 找家政" class="m-search"></ion-searchbar>
+    <div class="fake-searchbar" (click)="openHomeSearch()">
+      <div class="fake-searchbar-container">
+        <ion-icon class="fake-icon" name="ios-search">
+          <span>找二手车 找房子 找家政</span>
+        </ion-icon>
+      </div>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides class="banner-slides" *ngIf="bannerSlides" autoplay="3000" pager="true" loop padding #bannerSlidesEl>
+  <ion-slides class="banner-slides" *ngIf="bannerSlides" autoplay="3000" pager="true" loop #bannerSlidesEl>
     <ion-slide *ngFor="let bannerSlide of bannerSlides">
       <img [src]="bannerSlide.imageUrl">
     </ion-slide>
   </ion-slides>
   <ion-grid class="m-grid">
     <ion-row text-center>
-      <ion-col>
-        <ion-icon name="heart"></ion-icon>
+      <ion-col (click)="findGoods('SecondhandCarPage')">
+        <ion-icon name="ios-bans-car"></ion-icon>
         <p>二手车</p>
       </ion-col>
       <ion-col (click)="findGoods('SecondhandHousePage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-house"></ion-icon>
         <p>二手房</p>
       </ion-col>
       <ion-col (click)="findGoods('CarpoolingPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-carpooling"></ion-icon>
         <p>顺风车</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="findGoods('HousekeepingPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-housekeeping"></ion-icon>
         <p>家政</p>
       </ion-col>
       <ion-col (click)="findGoods('InternetWorkPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-internet"></ion-icon>
         <p>互联网</p>
       </ion-col>
       <ion-col (click)="findGoods('ConvenienceInfoPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-convenience"></ion-icon>
         <p>便民信息</p>
       </ion-col>
     </ion-row>
     <ion-row text-center>
       <ion-col (click)="findGoods('SecondhandGoodsPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-goods"></ion-icon>
         <p>二手设备</p>
       </ion-col>
       <ion-col (click)="findGoods('TourismPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-tourism"></ion-icon>
         <p>周边旅游</p>
       </ion-col>
       <ion-col (click)="findGoods('MallPage')">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="ios-bans-mall"></ion-icon>
         <p>电商平台</p>
       </ion-col>
     </ion-row>

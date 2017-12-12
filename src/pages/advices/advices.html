@@ -1,0 +1,23 @@
+<!--
+  Generated template for the AdvicesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>意见反馈</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-textarea placeholder="输入您想要反馈的内容，我们会尽快处理您的每一次建议" maxlength="255" [(ngModel)]="item.content"></ion-textarea>
+  </ion-item>
+  <div padding>
+    <button ion-button full round (click)="submit()">提交</button>
+  </div>
+</ion-content>

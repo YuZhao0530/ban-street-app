@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the HousekeepingDetailPage page.
  *
@@ -16,7 +16,23 @@ declare var require;
 })
 export class HousekeepingDetailPage {
   item: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  types = {
+    moveHouse: '搬家',
+    housemaid: '保姆/月嫂',
+    partTimeWorker: '钟点工',
+    cleaning: '保洁清洗',
+    houseMaintenance: '房屋维修',
+    applianceRepair: '修家电',
+    furnitureRepair: '修家具',
+    unlock: '开锁换锁',
+    decoration: '装修',
+  };
+  
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private callNumber: CallNumber
+  ) {
     this.item = navParams.get('item');
   }
 
@@ -34,7 +50,11 @@ export class HousekeepingDetailPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

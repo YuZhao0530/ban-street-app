@@ -8,6 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { PipesModule } from '../pipes/pipes.module';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
@@ -20,6 +21,9 @@ import { CallNumber } from '@ionic-native/call-number';
 import { HomeServicesProvider } from '../providers/home-services/home-services';
 import { HttpServicesProvider } from '../providers/http-services/http-services';
 import { PublishServicesProvider } from '../providers/publish-services/publish-services';
+import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { CarServicesProvider } from '../providers/car-services/car-services';
+import { UserServicesProvider } from '../providers/user-services/user-services';
 
 @NgModule({
   declarations: [
@@ -53,13 +57,17 @@ import { PublishServicesProvider } from '../providers/publish-services/publish-s
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HomeServicesProvider,
     HttpServicesProvider,
+    AppVersion,
     CallNumber,
     File,
     FileTransfer,
     Transfer,
     Camera,
     FilePath,
-    PublishServicesProvider
+    PublishServicesProvider,
+    LoginServiceProvider,
+    CarServicesProvider,
+    UserServicesProvider
   ]
 })
 export class AppModule {}

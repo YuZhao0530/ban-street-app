@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { LoadingController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+import { CallNumber } from '@ionic-native/call-number';
+import { HomeServicesProvider } from '../../providers/home-services/home-services';
 /**
  * Generated class for the TourismPage page.
  *
@@ -24,47 +27,69 @@ declare var require;
   templateUrl: 'tourism.html',
 })
 export class TourismPage {
-  list = [
-    {
-      title: '搜索周边游周边游周边游周边游周边游',
-      price: '168',
-      address: '地址地址地址地址地址地址',
-      notes: '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述',
-      tel: '13666657788',
-      createdDate: '2017-11-11',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
-      counts: 105366
-    },
-    {
-      title: '周边游周边游周边游周边游周边游',
-      price: '168',
-      address: '地址地址地址地址地址地址',
-      notes: '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述',
-      tel: '13666657788',
-      createdDate: '2017-11-11',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
-      counts: 105366
-    },
-    {
-      title: '周边游周边游周边游周边游周边游',
-      price: '168',
-      address: '地址地址地址地址地址地址',
-      notes: '描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述',
-      tel: '13666657788',
-      createdDate: '2017-11-11',
-      photos: ['assets/imgs/logo.png','assets/imgs/logo.png','assets/imgs/logo.png'],
-      counts: 105366
-    },
-  ];
+  list = [];
   filterKeywords = {
     title: ''
   };
   searchInput = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  page = 1;
+  totalPage = 1;
+  noMore = false;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public homeServices: HomeServicesProvider,
+    public events: Events,
+    private callNumber: CallNumber
+  ) {
+    events.subscribe('housekeepingFiltered:not enough items', () => {
+      if (this.page < this.totalPage) {
+        this.moreList(null);
+      }
+    });
+    this.getList();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TourismPage');
+  }
+
+  getList() {
+    this.page = 1;
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '加载中...'
+    });
+    loading.present();
+    this.homeServices.getTourismList(this.page).then(
+      (res) => {
+        this.list = res.result;
+        this.totalPage = Math.ceil(parseInt(res.totalPage) / 20);
+        if(this.totalPage < 2){
+          this.noMore = true;
+        }
+        loading.dismiss();
+        console.log('totalPage', this.totalPage);
+      }
+    );
+  }
+
+  moreList(infiniteScroll) {
+    console.log('more list');
+    this.page++;
+    if(this.page == this.totalPage){
+      this.noMore = true;
+    }
+    this.homeServices.getTourismList(this.page).then(
+      (res) => {
+        this.list = this.list.concat(res.result);
+        if (infiniteScroll) {
+          infiniteScroll.complete();
+        }
+      }
+    );
   }
 
   searchItems() {
@@ -85,7 +110,11 @@ export class TourismPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

@@ -14,12 +14,16 @@
 
 
 <ion-content>
-  <img [src]="item.poster">
+  <ion-slides *ngIf="item.photos" class="photos-slides" pager="true">
+    <ion-slide *ngFor="let photo of item.photos">
+      <img [src]="photo">
+    </ion-slide>
+  </ion-slides>
   <div padding>
     <h2>{{item.title}}</h2>
     <ion-row class="first-row">
       <ion-col text-left>
-        <span>发布时间&nbsp;{{item.createdDate}}</span>
+        <span>发布时间&nbsp;{{item.createdDate | date:'yyyy/MM/dd'}}</span>
       </ion-col>
       <ion-col text-right>
         <span>已有{{item.counts}}浏览</span>
@@ -28,7 +32,7 @@
     <ion-row>
       <ion-col>
         <label>服务类系</label>
-        <span>&nbsp;&nbsp;{{item.type}}</span>
+        <span>&nbsp;&nbsp;{{types[item.type]}}</span>
       </ion-col>
     </ion-row>
     <ion-row>

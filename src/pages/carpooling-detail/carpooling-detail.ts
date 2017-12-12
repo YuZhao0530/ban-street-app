@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the CarpoolingDetailPage page.
  *
@@ -40,9 +40,13 @@ export class CarpoolingDetailPage {
   item: any;
   type: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private callNumber: CallNumber
+  ) {
     this.item = this.navParams.get("item");
-    this.type = this.navParams.get("type");
+    this.type = this.item.type;
   }
 
   ionViewDidLoad() {
@@ -59,7 +63,11 @@ export class CarpoolingDetailPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        } 
       }]
     });
   }

@@ -1,0 +1,73 @@
+page-secondhand-car-detail {
+    .photos-slides {
+        height: 200px;
+        width: 100%;
+    }
+    .swiper-pagination-bullet-active {
+        background: color($colors, primary) !important;
+    }
+    .info-row {
+        border-top: 1px solid color($colors, border);
+        // border-bottom: 1px solid color($colors, border);
+        p {
+            margin: 11px 0;
+        }
+    }
+    .label-p {
+        color: gray;
+        font-size: 12px;
+    }
+    .content-p {
+        color: color($colors, primary);
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .label-ios {
+        margin: 0;
+    }
+    .float-div {
+        h1,h2 {
+            display: inline;
+        }
+        h2 {
+            color: color($colors, primary);
+        }
+        span {
+            color: gray;
+        }
+        img {
+            width: 24px;
+            height: 24px;
+        }
+    }
+    .footer-grid {
+        ion-item {
+            padding: 0;
+            height: 100%;
+        }
+        .button-full-ios {
+            margin: 0;
+        }
+        .item-ios.item-block .item-inner {
+            padding: 0;
+            border-bottom: none;
+        }
+        .item-ios p {
+            color: black;
+            margin-left: 11px;
+        }
+        .item-ios p:first-child {
+            color: #8e9093;
+        }
+        .label-ios {
+            margin: 11px 0 11px 0;
+        }
+        .item-ios [item-end] {
+            margin: 8px 8px 8px 0px;
+            color: #8e9093;
+        }
+        // .button-full-ios {
+        //     height: 100%;
+        // }
+    }
+}

@@ -1,0 +1,35 @@
+<!--
+  Generated template for the AccountInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>用户信息</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-avatar (click)="pickPicture()" item-start>
+      <img *ngIf="user.photo || photo" [src]="user.photo || photo">
+      <ion-icon *ngIf="!user.photo && !photo" name="ios-bans-person"></ion-icon>
+    </ion-avatar>
+    <ion-icon item-end name="arrow-forward"></ion-icon>
+  </ion-item>
+  <ion-item (click)="changeName()">
+    <span>昵称</span>
+    <p item-end>{{user.name}}</p>
+    <button color="dark" ion-button clear icon-only item-end>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-item>
+    <span>手机号</span>
+    <p item-end>{{user.tel}}</p>
+  </ion-item>
+</ion-content>

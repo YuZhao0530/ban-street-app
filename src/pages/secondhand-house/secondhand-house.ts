@@ -280,7 +280,8 @@ export class SecondhandHousePage {
   page = 1;
   totalPage = 1;
   noMore = false;
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public homeServices: HomeServicesProvider,

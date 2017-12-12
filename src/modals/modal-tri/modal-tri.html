@@ -1,0 +1,79 @@
+<ion-slides #slidesEl>
+
+    <ion-slide>
+        <ion-header>
+            <ion-navbar>
+                <ion-buttons left>
+                    <button ion-button icon-only (click)="viewCtrl.dismiss()">
+                        <ion-icon name="arrow-back"></ion-icon>
+                    </button>
+                </ion-buttons>
+                <ion-searchbar placeholder="输入关键字进行搜索" class="m-search" [debounce]="1500" [(ngModel)]="searchInput" (ionInput)="searchItems()"></ion-searchbar>
+            </ion-navbar>
+        </ion-header>
+        <ion-content>
+            <ion-list>
+                <ion-item *ngIf="type == 'filter'" (click)="viewCtrl.dismiss(undefined)" >
+                    <h2>不限</h2>
+                </ion-item>
+                <ion-item *ngFor="let brand of (brands | secondhandCarFilter: filterKeyword);" (click)="slideToTypes(brand)">
+                    <ion-thumbnail item-start>
+                        <img [src]="brand.logo">
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h2>{{brand?.name}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-header>
+            <ion-navbar>
+                <ion-buttons left>
+                    <button ion-button icon-only (click)="slidePrev()">
+                        <ion-icon name="arrow-back"></ion-icon>
+                    </button>
+                </ion-buttons>
+                <ion-title>
+                    {{selectedBrand && selectedBrand.name}}
+                </ion-title>
+            </ion-navbar>
+        </ion-header>
+        
+        <ion-content>
+            <ng-container *ngFor="let type of types;">
+                <ion-item-divider>
+                    {{type.name}}
+                </ion-item-divider>
+                <ion-item *ngFor="let sub of type.list;" (click)="slideToCars(sub)">
+                    <h2>{{sub.fullname}}</h2>
+                </ion-item>
+            </ng-container>
+        </ion-content>
+    </ion-slide>
+
+    <ion-slide>
+        <ion-header>
+            <ion-navbar>
+                <ion-buttons left>
+                    <button ion-button icon-only (click)="slidePrev()">
+                        <ion-icon name="arrow-back"></ion-icon>
+                    </button>
+                </ion-buttons>
+                <ion-title>
+                    {{selectedType && selectedType.fullname}}
+                </ion-title>
+            </ion-navbar>
+        </ion-header>
+        
+        <ion-content>
+            <ion-item *ngFor="let car of cars.list;" (click)="chooseCar(car)">
+                <ion-label>
+                    <h2>{{car.name}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-content>
+    </ion-slide>
+</ion-slides>

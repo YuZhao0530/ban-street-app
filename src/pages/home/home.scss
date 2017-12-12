@@ -22,4 +22,24 @@ page-home {
             }
         }
     }
+    .fake-searchbar {
+        width: 100%;
+        padding: 4px 8px;
+        .fake-searchbar-container {
+            width: 100%;
+            height: 36px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.18);
+            .fake-icon {
+                position: absolute;
+                left: 27px;
+                top: 17px;
+                color: #fff;
+                opacity: 0.4;
+                span {
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
 }

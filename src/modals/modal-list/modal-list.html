@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="viewCtrl.dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            选择
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content class="modal-content">
+    <ion-list class="modal-list" no-padding>
+        <ion-item *ngFor="let item of list;" (click)="dismiss(item)">
+            {{item}}
+        </ion-item>
+    </ion-list>
+</ion-content>

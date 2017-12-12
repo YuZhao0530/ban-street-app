@@ -41,33 +41,33 @@
 <ion-content>
   <ion-list class="driver-list" *ngIf="type == 'driver'">
     <ion-item *ngFor="let driver of driversList;">
-      <ion-label (click)="checkDetial(driver,'driver')">
+      <ion-label (click)="checkDetial(driver)">
         <ion-icon name="ios-time" color="danger"></ion-icon>
         <span>&nbsp;&nbsp;{{driver.departureTime}}&nbsp;&nbsp;</span>
         <span *ngIf="driver.model != '' && driver.model != null">{{driver.model}}-</span>
-        <span>空余{{driver.seats}}座位</span><br>
+        <span>空余{{driver.seats}}</span><br>
         <ion-icon name="ios-locate" color="secondary"></ion-icon>
         <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{driver.departureLocation}}</span><br>
         <ion-icon name="ios-locate" color="primary"></ion-icon>
         <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{driver.destination}}</span>
       </ion-label>
-      <button ion-button icon-only clear (click)="callPublisher(driver.tel)" item-end>
+      <button ion-button icon-only clear (click)="callContact(driver.tel)" item-end>
         <ion-icon name="ios-call"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
   <ion-list class="driver-list" *ngIf="type == 'passenger'">
     <ion-item *ngFor="let passenger of passengersList;">
-      <ion-label (click)="checkDetial(passenger,'passenger')">
+      <ion-label (click)="checkDetial(passenger)">
         <ion-icon name="ios-time" color="danger"></ion-icon>
         <span>&nbsp;&nbsp;{{passenger.departureTime}}&nbsp;&nbsp;</span>
-        <span>{{passenger.num}}人</span><br>
+        <span>{{passenger.num}}</span><br>
         <ion-icon name="ios-locate" color="secondary"></ion-icon>
         <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{passenger.departureLocation}}</span><br>
         <ion-icon name="ios-locate" color="primary"></ion-icon>
         <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{passenger.destination}}</span>
       </ion-label>
-      <button ion-button icon-only clear (click)="callPublisher(passenger.tel)" item-end>
+      <button ion-button icon-only clear (click)="callContact(passenger.tel)" item-end>
         <ion-icon name="ios-call"></ion-icon>
       </button>
     </ion-item>

@@ -1,0 +1,39 @@
+modal-home-search {
+    ion-scroll {
+        width: 100vw;
+        height: 49px;
+    }
+    ion-content .scroll-content {
+        margin-top: 101px !important;
+    }
+    ion-segment {
+        display: block;
+        white-space: nowrap;
+        font-size: 0;
+        overflow: auto;
+    
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
+        }
+    
+        ion-segment-button.segment-button {
+            display: inline-block !important;
+            min-width: 100px !important;
+            width: auto !important;
+        }
+    }
+    .toolbar-ios {
+        padding: 4px 0 0 0;
+    }
+    h2, p {
+        -o-text-overflow: ellipsis;/*兼容opera*/
+        text-overflow: ellipsis;/*这就是省略号喽*/		  
+        overflow: hidden;/*设置超过的隐藏*/
+        white-space: nowrap;/*设置不折行*/
+    }
+    // .list-ios {
+    //     margin-top: 54px;
+    // }
+}

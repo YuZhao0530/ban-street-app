@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
 import { CallNumber } from '@ionic-native/call-number';
 import { HomeServicesProvider } from '../../providers/home-services/home-services';
@@ -44,7 +44,9 @@ export class CarpoolingPage {
   page = 1;
   totalPage = 1;
   noMore = false;
-  constructor(public navCtrl: NavController, 
+  constructor(
+    public navCtrl: NavController, 
+    public loadingCtrl: LoadingController, 
     public navParams: NavParams,
     public homeServices: HomeServicesProvider,
     public events: Events,
@@ -65,6 +67,11 @@ export class CarpoolingPage {
 
   getList() {
     this.page = 1;
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: '加载中...'
+    });
+    loading.present();
     this.homeServices.getCarpoolingList(this.page).then(
       (res) => {
         this.list = res.result;
@@ -83,6 +90,7 @@ export class CarpoolingPage {
             this.events.publish('carpoolingFiltered:not enough items');
           }
         }
+        loading.dismiss();
         console.log('totalPage',this.totalPage);
       }
     );
@@ -133,7 +141,7 @@ export class CarpoolingPage {
     );
   }
 
-  callPublisher(tel) {
+  callContact(tel) {
     weui.confirm(tel, {
       title: '是否拨打电话',
       buttons: [{
@@ -152,8 +160,8 @@ export class CarpoolingPage {
     });
   }
 
-  checkDetial(item, type) {
-    this.navCtrl.push('CarpoolingDetailPage', { item: item, type: type });
+  checkDetial(item) {
+    this.navCtrl.push('CarpoolingDetailPage', { item: item });
   }
 
 }

@@ -1,0 +1,38 @@
+page-publish-housekeeping {
+    .item-ios {
+        border-bottom: 1px solid #c8c7cc;
+    }
+    .active-span {
+        color: black;
+    }
+    .inactive-span {
+        color: gray;
+    }
+    .item-ios.item-block .item-inner {
+        border-bottom: none;
+    }
+    .item-inner > ion-icon {
+        line-height: 1.4;
+    }
+    .image-picker {
+        display: inline-block;
+        float: left;
+        width: 25vw;
+        height: 25vw;
+        border: 1px solid gray;
+        margin: 8px;
+        ion-icon {
+            font-size: 25vw;
+        }
+        img {
+            height: 100%;
+        }
+    }
+    ion-textarea {
+        height: 166px;
+        .text-input-ios {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

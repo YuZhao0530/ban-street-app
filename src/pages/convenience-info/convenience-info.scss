@@ -1,5 +1,18 @@
 page-convenience-info {
-    ion-slides {
+    .swiper-slide img {
         height: 166px;
+        margin: auto;
+    }
+    .name-p {
+        margin-left: 8px;
+        display: inline;
+    }
+    ion-icon {
+        font-size: 2rem;
+        margin-left: 4px;
+    }
+    .content-p {
+        font-size: 16px;
+        color: black;
     }
 }

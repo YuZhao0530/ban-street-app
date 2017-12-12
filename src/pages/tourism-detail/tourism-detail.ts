@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { CallNumber } from '@ionic-native/call-number';
 /**
  * Generated class for the TourismDetailPage page.
  *
@@ -16,7 +16,11 @@ declare var require;
 })
 export class TourismDetailPage {
   item: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private callNumber: CallNumber
+  ) {
     this.item = navParams.get('item');
   }
 
@@ -34,7 +38,11 @@ export class TourismDetailPage {
       }, {
         label: '拨打',
         type: 'primary',
-        onClick: function () { console.log('yes') }
+        onClick: () => {
+          this.callNumber.callNumber(tel, true)
+          .then()
+          .catch();
+        }
       }]
     });
   }

@@ -1,0 +1,26 @@
+page-about-us {
+    .logo {
+        width: 30%;
+        height: auto;
+        padding-top: 3rem;
+        margin-bottom: 6rem;
+    }
+    ion-item {
+        padding-left: 10px !important;
+        margin-bottom: 10px;
+        font-size: 0.9em;
+    }
+    .settings-container {
+        position: absolute;
+        top: 0;
+        padding: 3rem;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        // z-index: 2;
+    }
+    .button-round-ios {
+        margin-top: 1.6rem;
+        // opacity: 0.8;
+    }
+}

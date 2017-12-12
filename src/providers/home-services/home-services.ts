@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { LoadingController } from 'ionic-angular';
 import { HttpServicesProvider } from '../http-services/http-services';
 
 /*
@@ -12,21 +11,32 @@ import { HttpServicesProvider } from '../http-services/http-services';
 @Injectable()
 export class HomeServicesProvider {
 
-  constructor(public httpServices: HttpServicesProvider, public loadingCtrl: LoadingController) {
+  constructor(public httpServices: HttpServicesProvider) {
     console.log('Hello HomeServicesProvider Provider');
   }
 
-  getCarpoolingList(page) {
-    let loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
-      content: '加载中...'
-    });
+  homeSearch(keyword) {
+    return this.httpServices.post('/homeSearch.php', { keyword: keyword }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
 
-    loading.present();
+  getCarpoolingList(page) {
     return this.httpServices.post('/getCarpoolingList.php', { page: page }).then(
       (res) => {
         console.log(res);
-        loading.dismiss();
+        return res
+      }
+    );
+  }
+
+  getSecondhandCarList(page) {
+    return this.httpServices.post('/getSecondhandCarList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
         return res
       }
     );
@@ -34,6 +44,60 @@ export class HomeServicesProvider {
 
   getSecondhandHouseList(page) {
     return this.httpServices.post('/getSecondhandHouseList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getSecondhandGoodsList(page) {
+    return this.httpServices.post('/getSecondhandGoodsList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getMallGoodsList(page) {
+    return this.httpServices.post('/getMallGoodsList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getInternetWorkList(page) {
+    return this.httpServices.post('/getInternetWorkList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getConvenienceInfoList(page) {
+    return this.httpServices.post('/getConvenienceInfoList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getTourismList(page) {
+    return this.httpServices.post('/getTourismList.php', { page: page }).then(
+      (res) => {
+        console.log(res);
+        return res
+      }
+    );
+  }
+
+  getHousekeepingList(page,dataType) {
+    return this.httpServices.post('/get'+dataType+'List.php', { page: page }).then(
       (res) => {
         console.log(res);
         return res
