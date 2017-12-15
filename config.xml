@@ -95,4 +95,6 @@
     <plugin name="cordova-plugin-filepath" spec="^1.1.0" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.11" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <engine name="ios" spec="~4.5.4" />
+    <preference name="SplashScreenDelay" value="3000" />
 </widget>
