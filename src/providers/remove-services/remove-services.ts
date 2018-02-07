@@ -81,7 +81,7 @@ export class RemoveServicesProvider {
   removeHousekeeping(item) {
     return this.httpServices.post('/remove' + item.dataType + '.php', { id: item.id }).then(
       (res) => {
-        console.log(res);
+        console.log(JSON.stringify(res));
         return res
       }
     );

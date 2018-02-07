@@ -100,7 +100,7 @@ export class PublishListPage {
             let dataType = this.type.substr(12, this.type.length);
             console.log(dataType);
             p.dataType = dataType;
-            return this.removeServices.removeConvenienceInfo(p)
+            return this.removeServices.removeHousekeeping(p)
         }
     }
 
