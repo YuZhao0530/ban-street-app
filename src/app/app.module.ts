@@ -24,6 +24,7 @@ import { PublishServicesProvider } from '../providers/publish-services/publish-s
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { CarServicesProvider } from '../providers/car-services/car-services';
 import { UserServicesProvider } from '../providers/user-services/user-services';
+import { RemoveServicesProvider } from '../providers/remove-services/remove-services';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { UserServicesProvider } from '../providers/user-services/user-services';
     PublishServicesProvider,
     LoginServiceProvider,
     CarServicesProvider,
-    UserServicesProvider
+    UserServicesProvider,
+    RemoveServicesProvider
   ]
 })
 export class AppModule {}
