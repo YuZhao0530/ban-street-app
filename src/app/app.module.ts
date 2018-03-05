@@ -12,7 +12,6 @@ import { AppVersion } from '@ionic-native/app-version';
 
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
-import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -61,7 +60,6 @@ import { UserServicesProvider } from '../providers/user-services/user-services';
     CallNumber,
     File,
     FileTransfer,
-    Transfer,
     Camera,
     FilePath,
     PublishServicesProvider,
