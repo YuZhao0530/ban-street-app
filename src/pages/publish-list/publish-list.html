@@ -6,7 +6,7 @@
 -->
 <ion-header>
     <ion-navbar>
-      <ion-title>我的发布</ion-title>
+        <ion-title>我的发布</ion-title>
     </ion-navbar>
     <ion-toolbar [hidden]="!list">
         <ion-scroll scrollX="true">
@@ -22,17 +22,22 @@
 <ion-content class="modal-content">
     <div [ngSwitch]="type">
         <ion-list *ngSwitchCase="'secondhandCar'">
-            <ion-item *ngFor="let item of list['secondhandCar'];" (click)="detail('SecondhandCarDetailPage',item)">
-                <ion-thumbnail item-start>
-                    <img *ngIf="item.photos" [src]="item.photos[0]">
-                    <img *ngIf="!item.photos" src="assets/imgs/logo.png">
-                </ion-thumbnail>
-                <h2 class="ellipsis-h2">{{item.title}}</h2>
-                <p>{{item.licenseBirth}} | {{item.drivenDistance}}万公里</p>
-                <h2 class="red-h2">{{item.price}}
-                    <span class="money-span">万</span>
-                </h2>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['secondhandCar'];index as i;">
+                <ion-item (click)="detail('SecondhandCarDetailPage',item)">
+                    <ion-thumbnail item-start>
+                        <img *ngIf="item.photos" [src]="item.photos[0]">
+                        <img *ngIf="!item.photos" src="assets/imgs/logo.png">
+                    </ion-thumbnail>
+                    <h2 class="ellipsis-h2">{{item.title}}</h2>
+                    <p>{{item.licenseBirth}} | {{item.drivenDistance}}万公里</p>
+                    <h2 class="red-h2">{{item.price}}
+                        <span class="money-span">万</span>
+                    </h2>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('SecondhandCarPage')">
                 <div *ngIf="list['secondhandCar'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -41,18 +46,23 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'secondhandHouse'">
-            <ion-item *ngFor="let item of list['secondhandHouse'];" (click)="detail('SecondhandHouseDetailPage',item)">
-                <ion-thumbnail item-start>
-                    <img *ngIf="item.photos" [src]="item.photos[0]">
-                    <img *ngIf="!item.photos" src="assets/imgs/logo.png">
-                </ion-thumbnail>
-                <h2 class="ellipsis-h2">{{item.title}}</h2>
-                <p>{{item.floor}}层 | 朝向 {{item.towards}} | {{item.decoration}}</p>
-                <p>{{item.bedroom}}室{{item.parlor}}厅{{item.bathroom}}卫</p>
-                <h2 class="red-h2">{{item.price}}
-                    <span class="money-span">万</span>
-                </h2>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['secondhandHouse'];index as i;">
+                <ion-item (click)="detail('SecondhandHouseDetailPage',item)">
+                    <ion-thumbnail item-start>
+                        <img *ngIf="item.photos" [src]="item.photos[0]">
+                        <img *ngIf="!item.photos" src="assets/imgs/logo.png">
+                    </ion-thumbnail>
+                    <h2 class="ellipsis-h2">{{item.title}}</h2>
+                    <p>{{item.floor}}层 | 朝向 {{item.towards}} | {{item.decoration}}</p>
+                    <p>{{item.bedroom}}室{{item.parlor}}厅{{item.bathroom}}卫</p>
+                    <h2 class="red-h2">{{item.price}}
+                        <span class="money-span">万</span>
+                    </h2>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('SecondhandHousePage')">
                 <div *ngIf="list['secondhandHouse'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -61,16 +71,21 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'secondhandGoods'">
-            <ion-item *ngFor="let item of list['secondhandGoods'];" (click)="detail('SecondhandGoodsDetailPage',item)">
-                <ion-thumbnail item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <h2 class="ellipsis-h2">{{item.title}}</h2>
-                <p>{{item.notes}}</p>
-                <h2 class="red-h2">{{item.price}}
-                    <span class="money-span">元</span>
-                </h2>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['secondhandGoods'];index as i;">
+                <ion-item (click)="detail('SecondhandGoodsDetailPage',item)">
+                    <ion-thumbnail item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <h2 class="ellipsis-h2">{{item.title}}</h2>
+                    <p>{{item.notes}}</p>
+                    <h2 class="red-h2">{{item.price}}
+                        <span class="money-span">元</span>
+                    </h2>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('SecondhandGoodsPage')">
                 <div *ngIf="list['secondhandGoods'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -79,31 +94,36 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'carpooling'">
-            <ion-item *ngFor="let item of list['carpooling'];" (click)="detail('CarpoolingDetailPage',item)">
-                <ion-label *ngIf="item.type == 'driver'">
-                    <ion-icon name="ios-time" color="danger"></ion-icon>
-                    <span>&nbsp;&nbsp;{{item.departureTime}}&nbsp;&nbsp;</span>
-                    <span *ngIf="item.model != '' && item.model != null">{{item.model}}-</span>
-                    <span>空余{{item.seats}}</span>
-                    <br>
-                    <ion-icon name="ios-locate" color="secondary"></ion-icon>
-                    <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{item.departureLocation}}</span>
-                    <br>
-                    <ion-icon name="ios-locate" color="primary"></ion-icon>
-                    <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{item.destination}}</span>
-                </ion-label>
-                <ion-label *ngIf="item.type == 'passenger'">
-                    <ion-icon name="ios-time" color="danger"></ion-icon>
-                    <span>&nbsp;&nbsp;{{item.departureTime}}&nbsp;&nbsp;</span>
-                    <span>{{item.num}}</span>
-                    <br>
-                    <ion-icon name="ios-locate" color="secondary"></ion-icon>
-                    <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{item.departureLocation}}</span>
-                    <br>
-                    <ion-icon name="ios-locate" color="primary"></ion-icon>
-                    <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{item.destination}}</span>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['carpooling'];index as i;">
+                <ion-item (click)="detail('CarpoolingDetailPage',item)">
+                    <ion-label *ngIf="item.type == 'driver'">
+                        <ion-icon name="ios-time" color="danger"></ion-icon>
+                        <span>&nbsp;&nbsp;{{item.departureTime}}&nbsp;&nbsp;</span>
+                        <span *ngIf="item.model != '' && item.model != null">{{item.model}}-</span>
+                        <span>空余{{item.seats}}</span>
+                        <br>
+                        <ion-icon name="ios-locate" color="secondary"></ion-icon>
+                        <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{item.departureLocation}}</span>
+                        <br>
+                        <ion-icon name="ios-locate" color="primary"></ion-icon>
+                        <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{item.destination}}</span>
+                    </ion-label>
+                    <ion-label *ngIf="item.type == 'passenger'">
+                        <ion-icon name="ios-time" color="danger"></ion-icon>
+                        <span>&nbsp;&nbsp;{{item.departureTime}}&nbsp;&nbsp;</span>
+                        <span>{{item.num}}</span>
+                        <br>
+                        <ion-icon name="ios-locate" color="secondary"></ion-icon>
+                        <span>&nbsp;&nbsp;从&nbsp;&nbsp;{{item.departureLocation}}</span>
+                        <br>
+                        <ion-icon name="ios-locate" color="primary"></ion-icon>
+                        <span>&nbsp;&nbsp;到&nbsp;&nbsp;{{item.destination}}</span>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('CarpoolingPage')">
                 <div *ngIf="list['carpooling'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -112,28 +132,37 @@
             </div>
         </ion-list>
         <ng-container *ngSwitchCase="'convenienceInfo'">
-            <ion-card *ngFor="let item of list['convenienceInfo']">
-                <ion-slides *ngIf="item.photos.length > 0" class="photos-slides" pager="true">
-                    <ion-slide text-center *ngFor="let photo of item.photos">
-                        <img [src]="photo">
-                    </ion-slide>
-                </ion-slides>
-                <ion-card-content>
-                    <p class="content-p">{{item.content}}</p>
-                </ion-card-content>
-                <ion-row>
-                    <ion-col text-left>
-                        <p class="name-p">
-                            {{item.publisherName}}
-                        </p>
-                    </ion-col>
-                    <ion-col text-right>
-                        <p>
-                            {{item.createdDate}}
-                        </p>
-                    </ion-col>
-                </ion-row>
-            </ion-card>
+            <ion-list class="func-convenienceInfo">
+                <ion-item-sliding *ngFor="let item of list['convenienceInfo'];index as i;">
+                    <ion-item>
+                        <ion-card>
+                            <ion-slides *ngIf="item.photos.length > 0" class="photos-slides" pager="true">
+                                <ion-slide text-center *ngFor="let photo of item.photos">
+                                    <img [src]="photo">
+                                </ion-slide>
+                            </ion-slides>
+                            <ion-card-content>
+                                <p class="content-p">{{item.content}}</p>
+                            </ion-card-content>
+                            <ion-row>
+                                <ion-col text-left>
+                                    <p class="name-p">
+                                        {{item.publisherName}}
+                                    </p>
+                                </ion-col>
+                                <ion-col text-right>
+                                    <p>
+                                        {{item.createdDate}}
+                                    </p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-card>
+                    </ion-item>
+                    <ion-item-options side="right">
+                        <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
             <div text-center class="more-data" (click)="checkForMore('ConvenienceInfoPage')">
                 <div *ngIf="list['convenienceInfo'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -142,15 +171,20 @@
             </div>
         </ng-container>
         <ion-list *ngSwitchCase="'internetWork'">
-            <ion-item *ngFor="let item of list['internetWork'];" (click)="detail('InternetWorkDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['internetWork'];index as i;">
+                <ion-item (click)="detail('InternetWorkDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('InternetWorkPage')">
                 <div *ngIf="list['internetWork'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -159,16 +193,21 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'mall'">
-            <ion-item *ngFor="let item of list['mall'];" (click)="detail('MallDetailPage',item)">
-                <ion-thumbnail item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <h2 class="ellipsis-h2">{{item.title}}</h2>
-                <p>{{item.notes}}</p>
-                <h2 class="red-h2">{{item.price}}
-                    <span class="money-span">元</span>
-                </h2>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['mall'];index as i;">
+                <ion-item (click)="detail('MallDetailPage',item)">
+                    <ion-thumbnail item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <h2 class="ellipsis-h2">{{item.title}}</h2>
+                    <p>{{item.notes}}</p>
+                    <h2 class="red-h2">{{item.price}}
+                        <span class="money-span">元</span>
+                    </h2>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('MallPage')">
                 <div *ngIf="list['mall'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -177,15 +216,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'tourism'">
-            <ion-item *ngFor="let item of list['tourism'];" (click)="detail('TourismDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['tourism'];index as i;">
+                <ion-item (click)="detail('TourismDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('TourismPage')">
                 <div *ngIf="list['tourism'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -194,15 +238,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingMoveHouse'">
-            <ion-item *ngFor="let item of list['housekeepingMoveHouse'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingMoveHouse'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','MoveHouse')">
                 <div *ngIf="list['housekeepingMoveHouse'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -211,15 +260,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingHousemaid'">
-            <ion-item *ngFor="let item of list['housekeepingHousemaid'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingHousemaid'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','Housemaid')">
                 <div *ngIf="list['housekeepingHousemaid'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -228,15 +282,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingPartTimeWorker'">
-            <ion-item *ngFor="let item of list['housekeepingPartTimeWorker'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingPartTimeWorker'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','PartTimeWorker')">
                 <div *ngIf="list['housekeepingPartTimeWorker'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -245,15 +304,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingCleaning'">
-            <ion-item *ngFor="let item of list['housekeepingCleaning'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingCleaning'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','Cleaning')">
                 <div *ngIf="list['housekeepingCleaning'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -262,15 +326,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingHouseMaintenance'">
-            <ion-item *ngFor="let item of list['housekeepingHouseMaintenance'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingHouseMaintenance'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','HouseMaintenance')">
                 <div *ngIf="list['housekeepingHouseMaintenance'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -279,15 +348,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingApplianceRepair'">
-            <ion-item *ngFor="let item of list['housekeepingApplianceRepair'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingApplianceRepair'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','ApplianceRepair')">
                 <div *ngIf="list['housekeepingApplianceRepair'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -296,15 +370,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingFurnitureRepair'">
-            <ion-item *ngFor="let item of list['housekeepingFurnitureRepair'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingFurnitureRepair'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','FurnitureRepair')">
                 <div *ngIf="list['housekeepingFurnitureRepair'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -313,15 +392,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingUnlock'">
-            <ion-item *ngFor="let item of list['housekeepingUnlock'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingUnlock'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','Unlock')">
                 <div *ngIf="list['housekeepingUnlock'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>
@@ -330,15 +414,20 @@
             </div>
         </ion-list>
         <ion-list *ngSwitchCase="'housekeepingDecoration'">
-            <ion-item *ngFor="let item of list['housekeepingDecoration'];" (click)="detail('HousekeepingDetailPage',item)">
-                <ion-thumbnail (click)="detail(item)" item-start>
-                    <img [src]="item.photos[0]">
-                </ion-thumbnail>
-                <ion-label (click)="detail(item)">
-                    <h2 class="ellipsis-h2">{{item.title}}</h2>
-                    <p>{{item.address}}</p>
-                </ion-label>
-            </ion-item>
+            <ion-item-sliding *ngFor="let item of list['housekeepingDecoration'];index as i;">
+                <ion-item (click)="detail('HousekeepingDetailPage',item)">
+                    <ion-thumbnail (click)="detail(item)" item-start>
+                        <img [src]="item.photos[0]">
+                    </ion-thumbnail>
+                    <ion-label (click)="detail(item)">
+                        <h2 class="ellipsis-h2">{{item.title}}</h2>
+                        <p>{{item.address}}</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" tappable (click)="remove(item,i)">删除</button>
+                </ion-item-options>
+            </ion-item-sliding>
             <div text-center class="more-data" (click)="checkForMore('HousekeepingListPage','Decoration')">
                 <div *ngIf="list['housekeepingDecoration'].length < 1" class="no-data" text-center>
                     <p>很难努力的搜索，可惜没有找到你想要的数据～</p>

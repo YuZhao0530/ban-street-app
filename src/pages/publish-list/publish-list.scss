@@ -33,4 +33,31 @@ page-publish-list {
         overflow: hidden;/*设置超过的隐藏*/
         white-space: nowrap;/*设置不折行*/
     }
+    .func-convenienceInfo {
+        ion-item-sliding {
+            margin-bottom: 10px;
+        }
+        .item-wrapper > .item-ios {
+            padding: 0;
+            .item-inner {
+                border-bottom: none !important;
+                padding: 0;
+                ion-label {
+                    margin: 0;
+                }
+            }
+        }
+        .community-list {
+            .item-ios {
+                border-bottom: none !important;
+            }
+            ion-card-content {
+                p {
+                    overflow: normal !important; 
+                    text-overflow: normal !important; 
+                    white-space: normal !important; 
+                }
+            }
+        }
+    }
 }
